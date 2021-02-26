@@ -9,7 +9,19 @@ export default function HomePage({ content }) {
   );
 };
 
-export async function getStaticProps() {
-  const content = await import(`../content/pages/${'home'}.md`);
+export async function getStaticProps({ params }) {
+  const content = await import(`../../../content/pages/${'home'}.md`);
   return { props: { content: content.default } };
 };
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      // String variant:
+      '/live/seminars/test',
+      // Object variant:
+      { params: { slug: 'second-post' } },
+    ],
+    fallback: false,
+  }
+}
