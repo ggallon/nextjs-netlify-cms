@@ -1,8 +1,10 @@
 export default {
   cms_manual_init: true,
+  publish_mode: 'editorial_workflow',
+  show_preview_links: true,
   backend: {
     name: 'github',
-    repo: 'jakeprins/nextjs-netlify-cms',
+    repo: 'ggallon/nextjs-netlify-cms',
     branch: 'main',
   },
   media_folder: 'public/img',
@@ -11,11 +13,13 @@ export default {
     {
       name: 'pages',
       label: 'Pages',
+      
       files: [
         {
           label: 'Home',
           name: 'home',
           file: 'content/pages/home.md',
+          show_preview_links: 'preview-home',
           fields: [
             {
               label: 'Hero Title',
@@ -36,5 +40,37 @@ export default {
         },
       ],
     },
+    {
+      name: 'seminars',
+      label: 'live/seminars',
+      folder: 'content/pages/live/seminars',
+      create: true,
+      slug: '{{permalink}}',
+      preview_path: '/live/seminars/{{slug}}',
+      fields: [
+        {
+          label: 'Title',
+          name: 'title',
+          widget: 'string',
+          default: ''
+        },
+        {
+          label: 'Category',
+          name: 'category',
+          widget: 'hidden',
+          default: 'live'
+        },
+        {
+          label: 'Permalink',
+          name: 'permalink',
+          widget: 'string'
+        },
+        {
+          label: 'Body',
+          name: 'body',
+          widget: 'markdown'
+        },
+      ]
+    }
   ],
 };
